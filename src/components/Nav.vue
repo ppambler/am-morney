@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <div class="nav">
     <router-link to="/money">记账</router-link>|
     <router-link to="/labels">便签</router-link>|
     <router-link to="/statistics">统计</router-link>
@@ -13,4 +13,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.nav {
+  border: 1px solid lightgreen;
+}
 </style>
