@@ -1,7 +1,7 @@
 <template>
   <Layout class-prefix="layout">
     <NumberPad />
-    <Types xxx="Money pass data" />
+    <Types :xxx="666" />
     <Notes />
     <Tags />
   </Layout>
