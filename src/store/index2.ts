@@ -10,4 +10,5 @@ const store = {
   ...tagStore,
 };
 
+console.log(store);
 export default store;
