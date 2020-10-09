@@ -90,13 +90,13 @@ export default class Statistics extends Vue {
       }
     }
 
-    result.map((group) => [
-      (group.total = group.items.reduce((sum, item) => {
-        console.log(sum);
-        console.log(item);
-        return sum + Number(item.amount);
-      }, 0)),
-    ]);
+    result.map((group) => {
+      group.total = group.items.reduce((sum, item) => {
+        return sum + item.amount;
+      }, 0);
+    });
+
+    console.log(result);
 
     return result;
   }
