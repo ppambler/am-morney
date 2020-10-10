@@ -1,5 +1,6 @@
 type RootState = {
   recordList: RecordItem[];
+  createTagFlag: boolean;
   tagList: Tag[];
   currentTag?: Tag;
 };
