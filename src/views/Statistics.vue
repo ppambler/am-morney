@@ -64,7 +64,7 @@ export default class Statistics extends Vue {
       .sort(
         (a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf()
       );
-    console.log(newList);
+    // console.log(newList);
     if (newList.length === 0) {
       return [] as Result;
     }
@@ -97,7 +97,7 @@ export default class Statistics extends Vue {
       }, 0);
     });
 
-    console.log(result);
+    // console.log(result);
 
     return result;
   }
