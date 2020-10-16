@@ -5,7 +5,9 @@
       :data-source="recordTypeList"
       :value.sync="type"
     />
-    <Chart :options="x" />
+    <div class="chart-wrapper" ref="chartWrapper">
+      <Chart class="chart" :options="x" />
+    </div>
     <ol v-if="groupedList.length > 0">
       <li v-for="(group, index) in groupedList" :key="index">
         <h3 class="title">
@@ -40,8 +42,15 @@ export default class Statistics extends Vue {
   tagString(tags: Tag[]) {
     return tags.length === 0 ? "无" : tags.join("，");
   }
+  mounted() {
+    (this.$refs.chartWrapper as HTMLDivElement).scrollLeft = 9999;
+  }
   get x() {
     return {
+      grid: {
+        left: 0,
+        right: 0,
+      },
       xAxis: {
         type: "category",
         data: [
@@ -76,12 +85,27 @@ export default class Statistics extends Vue {
           "29",
           "30",
         ],
+
+        axisTick: { alignWithLabel: true },
+        axisLine: {
+          lineStyle: {
+            color: "#666",
+          },
+        },
       },
       yAxis: {
         type: "value",
+        show: false,
       },
       series: [
         {
+          symbol: "circle",
+          symbolSize: 12,
+          itemStyle: {
+            borderWidth: 1,
+            color: "#666",
+            borderColor: "#666",
+          },
           data: [
             820,
             932,
@@ -117,7 +141,12 @@ export default class Statistics extends Vue {
           type: "line",
         },
       ],
-      tooltip: { show: true },
+      tooltip: {
+        show: true,
+        triggerOn: "click",
+        position: "top",
+        formatter: "{c}",
+      },
     };
   }
   beautify(string: string) {
@@ -237,5 +266,14 @@ export default class Statistics extends Vue {
   margin-right: auto;
   margin-left: 16px;
   color: #999;
+}
+.chart {
+  width: 430%;
+  &-wrapper {
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
 </style>
