@@ -6,7 +6,7 @@
       :value.sync="type"
     />
     <div class="chart-wrapper" ref="chartWrapper">
-      <Chart class="chart" :options="x" />
+      <Chart class="chart" :options="chartOptions" />
     </div>
     <ol v-if="groupedList.length > 0">
       <li v-for="(group, index) in groupedList" :key="index">
@@ -49,28 +49,25 @@ export default class Statistics extends Vue {
     div.scrollLeft = div.scrollWidth;
   }
 
-  get y() {
+  get keyValueList() {
     const today = new Date();
     const array = [];
     for (let i = 0; i <= 29; i++) {
       // this.recordList = [{date:7.3, value:100}, {date:7.2, value:200}]
-      console.log(day(today));
       const dateString = day(today).subtract(i, "day").format("YYYY-MM-DD");
-      console.log(this.recordList);
-      console.log(dateString);
       const found = _.find(this.recordList, {
         createdAt: dateString,
       });
       console.log(found);
       array.push({
-        date: dateString,
+        key: dateString,
         value: found ? found.amount : 0,
       });
     }
     array.sort((a, b) => {
-      if (a.date > b.date) {
+      if (a.key > b.key) {
         return 1;
-      } else if (a.date === b.date) {
+      } else if (a.key === b.key) {
         return 0;
       } else {
         return -1;
@@ -81,9 +78,9 @@ export default class Statistics extends Vue {
     return array;
   }
 
-  get x() {
-    const keys = this.y.map((item) => item.date);
-    const values = this.y.map((item) => item.value);
+  get chartOptions() {
+    const keys = this.keyValueList.map((item) => item.key);
+    const values = this.keyValueList.map((item) => item.value);
     return {
       grid: {
         left: 0,
