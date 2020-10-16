@@ -30,6 +30,7 @@ import Tags from "@/components/Money/Tags.vue";
 import Tabs from "@/components/Tabs.vue";
 import { Component } from "vue-property-decorator";
 import recordTypeList from "@/constants/recordTypeList";
+import day from "dayjs";
 
 @Component({
   components: {
@@ -49,7 +50,7 @@ export default class Money extends Vue {
     notes: "",
     type: "-",
     amount: 0,
-    createdAt: new Date().toISOString(),
+    createdAt: day(new Date()).format("YYYY-MM-DD"),
   };
   created() {
     this.$store.commit("fetchRecords");
