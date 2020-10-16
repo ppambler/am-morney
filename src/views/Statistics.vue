@@ -43,8 +43,11 @@ export default class Statistics extends Vue {
     return tags.length === 0 ? "无" : tags.join("，");
   }
   mounted() {
-    (this.$refs.chartWrapper as HTMLDivElement).scrollLeft = 9999;
+    const div = this.$refs.chartWrapper as HTMLDivElement;
+    console.log(div.scrollWidth);
+    div.scrollLeft = div.scrollWidth;
   }
+
   get x() {
     return {
       grid: {
